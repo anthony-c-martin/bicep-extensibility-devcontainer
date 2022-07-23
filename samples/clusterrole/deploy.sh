@@ -13,15 +13,11 @@ if [ $subId != '"28cbf98f-381d-4425-9ac4-cf342dab9753"' ]; then
 fi
 
 baseName="bicepkubedemo"
-adminUsername="anthony"
 
-az deployment sub create \
+az deployment group create \
   -f "$scriptPath/main.bicep" \
-  --location 'West Central US' \
+  --resource-group $baseName \
   --name $baseName \
   --parameters \
     baseName=$baseName \
-    dnsPrefix=$baseName \
-    linuxAdminUsername=$adminUsername \
-    sshRSAPublicKey="$(cat ~/.ssh/id_rsa.pub)" \
   --query properties.outputs
